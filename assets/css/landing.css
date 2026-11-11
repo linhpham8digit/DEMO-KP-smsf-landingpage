@@ -695,6 +695,13 @@ h1, h2, h3 { text-wrap: balance; }
     linear-gradient(to left, rgba(0, 15, 35, .88) 0%, rgba(0, 25, 50, .72) 34%, rgba(0, 40, 70, .2) 60%, rgba(0, 40, 70, 0) 75%),
     linear-gradient(to top, rgba(0, 15, 35, .6) 0%, rgba(0, 15, 35, 0) 40%); }
   .from-quiz .hero .hero-awards__badge { height: clamp(100px, min(10vw, 17vh), 150px); }
+  /* everything in the cluster sits against the right edge */
+  .from-quiz .hero .hero__copy { justify-items: end; text-align: right; }
+  .from-quiz .hero .hero__proof { justify-content: flex-end; }
+  .from-quiz .hero .hero-awards { justify-items: end; text-align: right; }
+  .from-quiz .hero .hero-awards__set { justify-items: end; }
+  .from-quiz .hero .hero-awards__row { justify-content: flex-end; }
+  .from-quiz .hero .hero-awards__dots { margin-left: 0; margin-right: -12px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
