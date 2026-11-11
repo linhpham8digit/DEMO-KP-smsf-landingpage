@@ -77,11 +77,48 @@
 
   /* ---------- done: the form card turns into a thank-you, then the page moves on ---------- */
   var REDUCE = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var autoScroll = null;   // pending "move on" timer
+  var gliding = null;      // running scroll animation
+
+  // A slow, eased scroll (1.4 to 2 s) instead of the browser's quick smooth scroll.
+  // Any wheel, touch or key from the visitor stops it, so it never fights them.
+  function glideTo(target) {
+    if (!target) return;
+    var startY = window.pageYOffset;
+    var endY = target.getBoundingClientRect().top + startY - 16;
+    if (REDUCE) { window.scrollTo(0, endY); return; }
+    var distance = endY - startY;
+    var duration = Math.min(2000, Math.max(1400, Math.abs(distance) * 1.6));
+    var start = null;
+    function ease(t) { return t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; }
+    function stop() { if (gliding) { cancelAnimationFrame(gliding); gliding = null; } removeStops(); }
+    function removeStops() { ["wheel", "touchstart", "keydown"].forEach(function (ev) { window.removeEventListener(ev, stop); }); }
+    ["wheel", "touchstart", "keydown"].forEach(function (ev) { window.addEventListener(ev, stop, { passive: true }); });
+    var html = document.documentElement;
+    var oldBehaviour = html.style.scrollBehavior;
+    html.style.scrollBehavior = "auto";   // the page's CSS smooth scroll would fight each step
+    function step(now) {
+      if (start === null) start = now;
+      var t = Math.min(1, (now - start) / duration);
+      window.scrollTo(0, startY + distance * ease(t));
+      if (t < 1) { gliding = requestAnimationFrame(step); }
+      else { gliding = null; html.style.scrollBehavior = oldBehaviour; removeStops(); }
+    }
+    gliding = requestAnimationFrame(step);
+  }
+
+  // If the visitor starts moving on their own before the automatic move, let them.
+  function cancelAutoScroll() {
+    if (autoScroll) { clearTimeout(autoScroll); autoScroll = null; }
+    ["wheel", "touchstart", "keydown"].forEach(function (ev) { window.removeEventListener(ev, cancelAutoScroll); });
+  }
 
   function showDone(firstName, thenScroll) {
     var card = form.closest(".form-card");
     if (!card) return;
-    card.textContent = "";
+    // keep the form (and its heading) in the page, just hidden, so it can come back
+    var kept = Array.prototype.slice.call(card.children);
+    kept.forEach(function (el) { el.hidden = true; });
     card.classList.add("is-done");
 
     var done = document.createElement("div");
@@ -104,6 +141,31 @@
     text.textContent = "We’ve got your details. Kien’s team will call you within 15 minutes in business hours to set up your free 45-minute strategy session.";
     done.appendChild(text);
 
+    var actions = document.createElement("div");
+    actions.className = "form-done__actions";
+
+    var again = document.createElement("button");
+    again.type = "button";
+    again.className = "btn btn--ghost form-done__again";
+    again.textContent = "Fill in the form again";
+    again.addEventListener("click", function () {
+      cancelAutoScroll();
+      if (gliding) { cancelAnimationFrame(gliding); gliding = null; }
+      done.remove();
+      card.classList.remove("is-done");
+      kept.forEach(function (el) { el.hidden = false; });
+      form.reset();
+      Array.prototype.forEach.call(form.querySelectorAll(".is-error"), function (n) { n.classList.remove("is-error"); });
+      Array.prototype.forEach.call(form.querySelectorAll(".f__error"), function (n) { n.remove(); });
+      var btn = form.querySelector("button[type=submit]");
+      btn.disabled = false;
+      btn.classList.remove("is-loading");
+      btn.removeAttribute("aria-busy");
+      if (card.getBoundingClientRect().top < 0) glideTo(card.closest(".hero") || card);
+      form.elements.first_name.focus({ preventScroll: true });
+    });
+    actions.appendChild(again);
+
     var next = document.getElementById("next");
     if (next) {
       var more = document.createElement("a");
@@ -115,20 +177,22 @@
       arrow.setAttribute("aria-hidden", "true");
       arrow.textContent = "↓";
       more.appendChild(arrow);
-      done.appendChild(more);
+      more.addEventListener("click", function (e) { e.preventDefault(); cancelAutoScroll(); glideTo(next); });
+      actions.appendChild(more);
     }
+    done.appendChild(actions);
 
     card.appendChild(done);
     title.focus({ preventScroll: true });
 
     // After a moment to read it, glide down to the rest of the page.
     if (thenScroll && next) {
-      setTimeout(function () {
-        next.scrollIntoView({ behavior: REDUCE ? "auto" : "smooth", block: "start" });
-      }, REDUCE ? 1500 : 2600);
+      ["wheel", "touchstart", "keydown"].forEach(function (ev) { window.addEventListener(ev, cancelAutoScroll, { passive: true }); });
+      autoScroll = setTimeout(function () { cancelAutoScroll(); glideTo(next); }, REDUCE ? 1500 : 2600);
     }
   }
 
-  // Arriving from the quiz: the details are already in, so there is no form to fill.
+  // Arriving from the quiz: the details are already in, so the form is not shown
+  // (the "Fill in the form again" button still brings it back if they want it).
   if (new URLSearchParams(window.location.search).get("from") === "quiz") showDone("", false);
 })();
