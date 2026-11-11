@@ -669,6 +669,16 @@ h1, h2, h3 { text-wrap: balance; }
 @keyframes done-bar { from { transform: scaleX(0); } to { transform: scaleX(1); } }
 .quiz-done__go { color: var(--navy); font-weight: 600; }
 
+/* ---------- form card after sending (or arriving from the quiz): done and thank you ---------- */
+.form-card.is-done { align-content: center; }
+.form-done { display: grid; gap: clamp(12px, 2vh, 18px); justify-items: start; padding-block: clamp(12px, 3vh, 36px); animation: rise .5s cubic-bezier(.2, .7, .2, 1) both; }
+.form-done__title { font-size: clamp(26px, 3.6vh, 34px); }
+.form-done__text { font-size: 15.5px; line-height: 1.6; color: var(--muted); max-width: 40ch; text-wrap: pretty; }
+.form-done__more { margin-top: 4px; }
+.form-done__more .arrow { transition: transform .25s ease-out; }
+.form-done__more:hover .arrow { transform: translateY(3px); }
+#next { scroll-margin-top: 16px; }
+
 @media (prefers-reduced-motion: reduce) {
   [data-reveal] { opacity: 1; transform: none; transition: none; }
   .testimonials .reviews { overflow-x: auto; touch-action: auto; cursor: auto; }
