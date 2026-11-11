@@ -188,11 +188,10 @@
     // After a moment to read it, glide down to the rest of the page.
     if (thenScroll && next) {
       ["wheel", "touchstart", "keydown"].forEach(function (ev) { window.addEventListener(ev, cancelAutoScroll, { passive: true }); });
-      autoScroll = setTimeout(function () { cancelAutoScroll(); glideTo(next); }, REDUCE ? 1500 : 2600);
+      autoScroll = setTimeout(function () { cancelAutoScroll(); glideTo(next); }, REDUCE ? 600 : 1000);
     }
   }
 
-  // Arriving from the quiz: the details are already in, so the form is not shown
-  // (the "Fill in the form again" button still brings it back if they want it).
-  if (new URLSearchParams(window.location.search).get("from") === "quiz") showDone("", false);
+  // Arriving from the quiz (?from=quiz) is handled before the page draws: mode.js marks the
+  // page and landing.css leaves the form out, so nothing here needs to run for it.
 })();

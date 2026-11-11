@@ -683,6 +683,20 @@ h1, h2, h3 { text-wrap: balance; }
 .form-done__more:hover .arrow { transform: translateY(3px); }
 #next { scroll-margin-top: 16px; }
 
+/* ---------- landing reached from the quiz: same page, no form, Kien on the right ----------
+   The visitor has already sent their details, so the form (and any thank-you) is left out
+   and the Kien Phan cluster takes the form's place on the right. The photographs keep Kien
+   himself in the left third, so the two sit side by side. */
+.from-quiz .hero__form { display: none; }
+@media (min-width: 901px) {
+  .from-quiz .hero { grid-template-columns: minmax(0, 1fr) minmax(0, 640px); padding-right: var(--edge); }
+  .from-quiz .hero .hero__copy, .from-quiz .hero .hero__proof { grid-column: 2; max-width: none; }
+  .from-quiz .hero__media::after { background:
+    linear-gradient(to left, rgba(0, 15, 35, .88) 0%, rgba(0, 25, 50, .72) 34%, rgba(0, 40, 70, .2) 60%, rgba(0, 40, 70, 0) 75%),
+    linear-gradient(to top, rgba(0, 15, 35, .6) 0%, rgba(0, 15, 35, 0) 40%); }
+  .from-quiz .hero .hero-awards__badge { height: clamp(100px, min(10vw, 17vh), 150px); }
+}
+
 @media (prefers-reduced-motion: reduce) {
   [data-reveal] { opacity: 1; transform: none; transition: none; }
   .testimonials .reviews { overflow-x: auto; touch-action: auto; cursor: auto; }
