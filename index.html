@@ -8,6 +8,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<!-- Where a visitor from the quiz goes back to if they reload this page (see mode.js). -->
+<meta name="kp-quiz" content="https://demo-kp-smsf-quizz.vercel.app/" />
 <script src="assets/js/mode.js"></script>
 <link rel="stylesheet" href="assets/css/landing.css" />
 </head>
@@ -23,11 +25,16 @@
       <img class="hero__slide hero__slide--3" src="assets/img/hero/slide-3-award.webp" alt="" />
       <img class="hero__slide hero__slide--4" src="assets/img/hero/slide-4-podium.webp" alt="" />
     </div>
+    <!-- white logo: only shown on the version reached from the quiz, which has no form (the form carries the logo) -->
     <div class="hero__brand" data-enter><img class="logo" src="assets/img/logo-fundwise-white.png" alt="Fundwise Capital" width="900" height="347" /></div>
 
       <div class="hero__copy" data-enter>
-        <h1 class="hero__name" id="heroTitle">Kien Phan</h1>
-        <p class="hero__role">Finance Broker, Fundwise Capital Australia <span class="hero__sep" aria-hidden="true">|</span><span class="hero__mfaa">MFAA&nbsp;member</span></p>
+        <!-- DRAFT headline: Content writes the final copy. -->
+        <h1 class="hero__headline" id="heroTitle">See your SMSF<br /> property loan options.</h1>
+        <div class="hero__who-block">
+          <p class="hero__who-name">Kien Phan</p>
+          <p class="hero__role">Finance Broker, Fundwise Capital Australia <span class="hero__sep" aria-hidden="true">|</span><span class="hero__mfaa">MFAA&nbsp;member</span></p>
+        </div>
       </div>
 
       <div class="hero__proof hero-awards" data-enter>
@@ -67,6 +74,7 @@
 
       <div class="hero__form" id="book" data-enter>
         <div class="form-card">
+          <img class="form-card__logo" src="assets/img/logo-fundwise.png" alt="Fundwise Capital" width="900" height="347" />
           <h2 class="form-card__title">Book your free strategy session</h2>
 
           <form class="lead-form" id="leadForm" novalidate data-page="smsf">

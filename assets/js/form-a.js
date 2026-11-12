@@ -117,7 +117,8 @@
     var card = form.closest(".form-card");
     if (!card) return;
     // keep the form (and its heading) in the page, just hidden, so it can come back
-    var kept = Array.prototype.slice.call(card.children);
+    // (the logo stays on the card)
+    var kept = Array.prototype.slice.call(card.children).filter(function (el) { return !el.classList.contains("form-card__logo"); });
     kept.forEach(function (el) { el.hidden = true; });
     card.classList.add("is-done");
 

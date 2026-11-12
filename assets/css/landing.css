@@ -135,8 +135,6 @@ h1, h2, h3 { text-wrap: balance; }
 .hero__award b { display: block; font-size: 14.5px; font-weight: 600; color: var(--white); }
 .hero__form { grid-column: 2; grid-row: 1 / 5; align-self: center; }
 
-/* Kien Phan, set large in place of a headline */
-.hero__name { font: 400 clamp(56px, min(7vw, 11vh), 112px)/.95 var(--serif); letter-spacing: -.02em; color: var(--white); }
 .hero__role { font: 500 clamp(17px, 2.4vh, 22px)/1.35 var(--sans); color: rgba(255, 255, 255, .92); margin-top: 6px; }
 /* role and MFAA membership on one line on wide screens; on phones MFAA drops to its own line */
 .hero__sep { margin-inline: .35em; color: rgba(255, 255, 255, .45); font-weight: 300; }
@@ -166,8 +164,6 @@ h1, h2, h3 { text-wrap: balance; }
 .hero-awards__dot:hover::before { background: rgba(255, 255, 255, .6); }
 .hero-awards__dot.is-active::before { width: 22px; background: var(--white); }
 
-/* Kien Phan, set large in place of a headline */
-.hero__name { font: 400 clamp(56px, min(7vw, 11vh), 112px)/.95 var(--serif); letter-spacing: -.02em; color: var(--white); }
 .hero__role { font: 500 clamp(17px, 2.4vh, 22px)/1.35 var(--sans); color: rgba(255, 255, 255, .92); margin-top: 6px; }
 
 
@@ -316,14 +312,21 @@ h1, h2, h3 { text-wrap: balance; }
 .quiz-photo > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 44% 28%; transition: transform .7s cubic-bezier(.2, .7, .2, 1); }
 
 .quiz-body { display: grid; gap: 20px; }
-.quiz-intro { display: flex; align-items: center; gap: 12px; }
-.quiz-intro img { width: 46px; height: 46px; border-radius: 50%; object-fit: cover; object-position: 50% 15%; flex: none; }
-.quiz-intro p { background: var(--white); border-radius: 16px 16px 16px 4px; padding: 11px 15px; font-size: 14.5px; line-height: 1.45; color: var(--ink); }
-.quiz-intro b { font-weight: 600; }
 
-.progress { display: grid; gap: 8px; }
-.progress__bar { height: 6px; border-radius: 100px; background: var(--white); overflow: hidden; }
-.progress__bar i { display: block; height: 100%; border-radius: 100px; background: var(--navy); transition: width .35s ease; }
+.progress { display: grid; gap: 10px; }
+/* one segment per step; a step already reached can be tapped to go back to it */
+.progress__steps { list-style: none; margin: 0; padding: 0; display: flex; gap: 6px; }
+.progress__steps li { flex: 1; display: flex; }
+.progress__seg { flex: 1; position: relative; height: 22px; padding: 0; border: 0; background: none; cursor: pointer; }
+.progress__seg::before { content: ""; position: absolute; left: 0; right: 0; top: 8px; height: 6px; border-radius: 100px; background: var(--white); transition: background-color .3s, transform .2s; }
+.progress__seg.is-done::before { background: var(--navy); }
+.progress__seg.is-current::before { background: var(--ocean); }
+.progress__seg.is-ahead::before { background: var(--soft); }
+.progress__seg:not(:disabled):hover::before { transform: scaleY(1.6); }
+.progress__seg:disabled { cursor: default; }
+.progress__seg:focus-visible { outline: 2px solid var(--navy); outline-offset: 2px; border-radius: 4px; }
+.progress__row { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 24px; }
+.progress__row .back { min-height: 24px; padding: 0; font-size: 13px; }
 .progress__label { font: 500 11.5px/1 var(--mono); letter-spacing: 1.4px; color: var(--muted); text-transform: uppercase; }
 .quiz-q { font: 400 clamp(24px, 2.4vw, 30px)/1.15 var(--serif); color: var(--ink); }
 .quiz-q:focus { outline: none; }
@@ -342,10 +345,8 @@ h1, h2, h3 { text-wrap: balance; }
 .opts--grid .opt { justify-content: center; text-align: center; padding: 14px 4px; }
 .opts--grid .opt::after { display: none; }
 .opt.is-picked { border-color: var(--navy); background: var(--mist); color: var(--navy); }
-.quiz-foot { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 22px; }
 .back { border: 0; background: none; min-height: 44px; padding: 4px 0; font-size: 14px; font-weight: 500; color: var(--muted); cursor: pointer; }
 .back:hover { color: var(--navy); }
-.trust { font-size: 13px; color: var(--muted); }
 .quiz-card .f input { background: var(--white); }
 .quiz-card .yn__opts span { background: var(--white); }
 
@@ -412,9 +413,7 @@ h1, h2, h3 { text-wrap: balance; }
   .hero-awards__dot::before { background: var(--ice); }
   .hero-awards__dot.is-active::before { background: var(--navy); }
   .hero-awards__dot:hover::before { background: var(--soft); }
-  .hero__name { font-size: clamp(48px, 13vw, 72px); }
   .hero__role { font-size: 17px; }
-  .hero__name { font-size: clamp(48px, 13vw, 72px); }
   .hero__role { font-size: 17px; }
   .hero__who b { color: var(--ink); }
   .hero__award { border-left-color: var(--line); }
@@ -509,7 +508,6 @@ h1, h2, h3 { text-wrap: balance; }
 .quiz-body .opt:nth-child(8) { animation-delay: .28s; }
 
 /* the progress bar grows from where it was */
-.progress__bar i { transition: width .55s cubic-bezier(.2, .7, .2, 1); }
 
 /* answer buttons: lift on hover, press on click, a ripple from the pointer, then a tick */
 .opt { position: relative; overflow: hidden; isolation: isolate;
@@ -567,31 +565,29 @@ h1, h2, h3 { text-wrap: balance; }
 
 @media (min-width: 901px) {
   .quiz-screen { min-height: 100vh; min-height: 100svh; display: grid; grid-template-rows: 1fr auto; }
-  .quiz-screen > main { display: grid; grid-template-rows: auto auto 1fr; min-height: 0; }
+  /* the card is as tall as its content (the photo matches it), and the heading, card and photo
+     sit centred in the space under the logo row instead of the card stretching to fill it */
+  .quiz-screen > main { display: flex; flex-direction: column; min-height: 0; }
+  .quiz-screen .intro { margin-top: auto; }
+  .quiz-screen .quiz-grid { margin-bottom: auto; }
+  /* every question step is the height of the tallest one, so the card does not jump between them */
+  .quiz-screen .quiz-body { min-height: clamp(260px, 44.5vh, 470px); }
   .quiz-screen .page-top { padding-top: clamp(12px, 2.4vh, 28px); }
   .quiz-screen .page-top .logo, .quiz-screen .page-top .award-pair { height: clamp(44px, 7.4vh, 76px); }
   .quiz-screen .intro { padding-block: clamp(8px, 2vh, 36px) clamp(10px, 2.2vh, 28px); }
-  /* heading and side note sized as a pair: the note fills the photo column below it and,
-     its line height is set from the heading so its three lines match the heading's two */
   .quiz-screen .intro { --intro-t: clamp(28px, min(3.6vw, 5.4vh), 50px); align-items: center; }
   .quiz-screen .display { font-size: var(--intro-t); }
-  .quiz-screen .intro__aside { max-width: none; font-size: min(1.45vw, 18px); line-height: calc(var(--intro-t) * .68); padding-bottom: 0; text-wrap: pretty; }
-  .quiz-screen .quiz-grid { min-height: 0; }
   .quiz-screen .quiz-photo { min-height: 0; }
   .quiz-screen .quiz-card { padding: clamp(16px, 3vh, 40px) clamp(20px, 2.6vw, 40px); gap: clamp(10px, 1.7vh, 20px); }
   .quiz-screen .quiz-body { gap: clamp(10px, 1.7vh, 20px); }
-  .quiz-screen .quiz-intro img { width: clamp(34px, 5vh, 46px); height: clamp(34px, 5vh, 46px); }
-  .quiz-screen .quiz-intro p { font-size: clamp(13px, 1.75vh, 14.5px); padding: clamp(7px, 1.2vh, 11px) 15px; }
-  .quiz-screen .quiz-q { font-size: clamp(20px, 3.3vh, 30px); }
+  .quiz-screen .quiz-q { font-size: clamp(22px, 3.9vh, 38px); }
   .quiz-screen .opts { gap: clamp(6px, 1.1vh, 10px); }
-  .quiz-screen .opt { min-height: clamp(44px, 6.4vh, 56px); padding-block: clamp(8px, 1.4vh, 14px); }
-  .quiz-screen .quiz-foot { min-height: 0; }
-  .quiz-screen .back { min-height: clamp(30px, 4.4vh, 44px); }
+  .quiz-screen .opt { min-height: clamp(48px, 7.6vh, 72px); padding-block: clamp(8px, 1.4vh, 14px); font-size: clamp(14px, 1.95vh, 17px); }
   .quiz-screen .lead-form { gap: clamp(6px, 1.1vh, 12px) 12px; }
   .quiz-screen .f input { height: clamp(40px, 5.6vh, 50px); min-height: 40px; }
   .quiz-screen .lead-form .btn { min-height: clamp(44px, 6vh, 54px); padding-block: 10px; }
   .quiz-screen .mini-foot { padding-block: clamp(6px, 1.2vh, 22px) clamp(8px, 1.6vh, 26px); font-size: 12px; line-height: 1.5; }
-  /* contact step: mobile and email side by side; the call-back line is already in the heading's side note */
+  /* contact step: mobile and email side by side, the call-back line left out to keep it on one screen */
   .quiz-screen .quiz-card .lead-form .f--full { grid-column: auto; }
   .quiz-screen .quiz-card .form-note { display: none; }
   .quiz-screen .quiz-card .yn { flex-wrap: nowrap; }
@@ -715,4 +711,20 @@ h1, h2, h3 { text-wrap: balance; }
   .hero-awards__set { transition: none; }
   html { scroll-behavior: auto; }
   * { transition: none !important; animation: none !important; }
+}
+
+/* ---------- landing hero: the headline leads, Kien Phan sits under it ----------
+   The form card carries the colour logo, so the white logo on the photograph only shows
+   on the version reached from the quiz, which has no form. */
+.hero__headline { font: 400 clamp(40px, min(4.8vw, 7.6vh), 68px)/1.02 var(--serif); letter-spacing: -.015em; color: var(--white); }
+.hero__who-block { display: grid; gap: 4px; margin-top: clamp(6px, 1.8vh, 18px); }
+.hero__who-name { font: 400 clamp(22px, 3.4vh, 32px)/1.1 var(--serif); color: var(--white); }
+.hero__who-block .hero__role { margin-top: 0; }
+.hero__brand { display: none; }
+.from-quiz .hero__brand { display: block; }
+.form-card__logo { display: block; height: clamp(34px, 5vh, 48px); width: auto; justify-self: start; }
+.form-card.is-done .form-card__logo { justify-self: center; }
+@media (max-width: 900px) {
+  .hero__headline { font-size: clamp(36px, 10vw, 56px); }
+  .hero__who-name { font-size: 24px; }
 }
