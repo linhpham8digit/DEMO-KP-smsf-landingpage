@@ -571,18 +571,20 @@ h1, h2, h3 { text-wrap: balance; }
   .quiz-screen .intro { margin-top: auto; }
   .quiz-screen .quiz-grid { margin-bottom: auto; }
   /* every question step is the height of the tallest one, so the card does not jump between them */
-  .quiz-screen .quiz-body { min-height: clamp(260px, 44.5vh, 470px); }
+  .quiz-screen .quiz-body { min-height: clamp(280px, 50vh, 540px); }
   .quiz-screen .page-top { padding-top: clamp(12px, 2.4vh, 28px); }
   .quiz-screen .page-top .logo, .quiz-screen .page-top .award-pair { height: clamp(44px, 7.4vh, 76px); }
   .quiz-screen .intro { padding-block: clamp(8px, 2vh, 36px) clamp(10px, 2.2vh, 28px); }
-  .quiz-screen .intro { --intro-t: clamp(28px, min(3.6vw, 5.4vh), 50px); align-items: center; }
-  .quiz-screen .display { font-size: var(--intro-t); }
+  /* the heading is one line exactly as wide as the quiz card under it: its column matches the
+     card's column, and the size is a share of that column's width (cqi) */
+  .quiz-screen .intro__main { container-type: inline-size; }
+  .quiz-screen .display { font-size: 6.27cqi; white-space: nowrap; }
   .quiz-screen .quiz-photo { min-height: 0; }
   .quiz-screen .quiz-card { padding: clamp(16px, 3vh, 40px) clamp(20px, 2.6vw, 40px); gap: clamp(10px, 1.7vh, 20px); }
   .quiz-screen .quiz-body { gap: clamp(10px, 1.7vh, 20px); }
-  .quiz-screen .quiz-q { font-size: clamp(22px, 3.9vh, 38px); }
+  .quiz-screen .quiz-q { font-size: clamp(22px, 4.2vh, 42px); }
   .quiz-screen .opts { gap: clamp(6px, 1.1vh, 10px); }
-  .quiz-screen .opt { min-height: clamp(48px, 7.6vh, 72px); padding-block: clamp(8px, 1.4vh, 14px); font-size: clamp(14px, 1.95vh, 17px); }
+  .quiz-screen .opt { min-height: clamp(50px, 8.6vh, 84px); padding-block: clamp(8px, 1.4vh, 14px); font-size: clamp(14px, 2.1vh, 18px); }
   .quiz-screen .lead-form { gap: clamp(6px, 1.1vh, 12px) 12px; }
   .quiz-screen .f input { height: clamp(40px, 5.6vh, 50px); min-height: 40px; }
   .quiz-screen .lead-form .btn { min-height: clamp(44px, 6vh, 54px); padding-block: 10px; }
