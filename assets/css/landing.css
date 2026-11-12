@@ -578,7 +578,7 @@ h1, h2, h3 { text-wrap: balance; }
   /* the heading is one line running the full width of the card and photo under it: it spans
      both columns, and the size is a share of that width (cqi) */
   .quiz-screen .intro__main { container-type: inline-size; grid-column: 1 / -1; }
-  .quiz-screen .display { font-size: 6.27cqi; white-space: nowrap; }
+  .quiz-screen .display { font-size: 6.34cqi; white-space: nowrap; }
   .quiz-screen .quiz-photo { min-height: 0; }
   .quiz-screen .quiz-card { padding: clamp(16px, 3vh, 40px) clamp(20px, 2.6vw, 40px); gap: clamp(10px, 1.7vh, 20px); }
   .quiz-screen .quiz-body { gap: clamp(10px, 1.7vh, 20px); }
