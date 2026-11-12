@@ -84,6 +84,8 @@
   // Any wheel, touch or key from the visitor stops it, so it never fights them.
   function glideTo(target) {
     if (!target) return;
+    // the page-wide smooth scroll (smooth-scroll.js) does the gliding when it is loaded
+    if (window.KPScroll) { window.KPScroll.to(target, { offset: -16, duration: 1500 }); return; }
     var startY = window.pageYOffset;
     var endY = target.getBoundingClientRect().top + startY - 16;
     if (REDUCE) { window.scrollTo(0, endY); return; }
@@ -152,6 +154,7 @@
     again.addEventListener("click", function () {
       cancelAutoScroll();
       if (gliding) { cancelAnimationFrame(gliding); gliding = null; }
+      if (window.KPScroll) window.KPScroll.stop();
       done.remove();
       card.classList.remove("is-done");
       kept.forEach(function (el) { el.hidden = false; });
