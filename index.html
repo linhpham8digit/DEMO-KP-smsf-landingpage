@@ -40,7 +40,7 @@
         </div>
       </div>
 
-      <div class="hero__proof hero-awards" data-enter>
+      <div class="hero__proof hero-awards" id="awards" data-enter>
         <p class="hero-awards__head"><b>Australian Brokerage of the Year</b> Australian Mortgage Awards 2025</p>
         <div class="hero-awards__stage" id="heroAwards">
           <div class="hero-awards__set is-active" data-set="0">
@@ -201,7 +201,7 @@
   </section>
 
   <!-- 3. Reviews: the kienphan.com.au testimonials section, recoloured -->
-  <section class="testimonials" data-reveal aria-labelledby="revTitle">
+  <section class="testimonials" id="reviews" data-reveal aria-labelledby="revTitle">
     <div class="testimonials__head">
       <span class="eyebrow eyebrow--bronze">REAL CLIENTS, REAL OUTCOMES</span>
       <h2 class="testimonials__title" id="revTitle">In their own words.</h2>
@@ -260,7 +260,7 @@
   </section>
 
   <!-- 4. How I work -->
-  <section class="wrap section-pad-top" aria-labelledby="howTitle">
+  <section class="wrap section-pad-top" id="how-it-works" aria-labelledby="howTitle">
     <div class="band">
       <div class="band__copy">
         <span class="pill-label">How I work</span>
@@ -283,16 +283,26 @@
 </main>
 
 <!-- 5. Footer -->
-<footer class="site-foot">
-  <div class="wrap site-foot__row">
-    <img class="logo" src="assets/img/logo-fundwise-white.png" alt="Fundwise Capital" width="900" height="347" />
-    <div class="site-foot__fine">
-      <p>&copy; 2026 Fundwise Capital. Kien Phan is a credit representative 514862 of Connective Credit Services Pty Ltd (Australian Credit Licence 389328). MFAA member.</p>
-      <p>General information only. It does not take your personal circumstances into account. Speak with your accountant or a licensed adviser about your fund.</p>
-      <!-- TODO: real privacy policy and credit guide URLs. -->
-      <nav class="site-foot__links" aria-label="Legal"><a href="#">Privacy policy</a><a href="#">Credit guide</a></nav>
+<!-- Footer: the kienphan.com.au footer, same layout, in Fundwise colours. -->
+<footer class="footer">
+  <div class="footer__row">
+    <div class="footer__brand">
+      <p class="footer__brand-name">Fundwise Capital</p>
+      <p class="footer__tagline">Property and finance advice for<br />Australian families and investors.<br />Every property, measured.</p>
     </div>
+    <nav class="footer__links" aria-label="Footer">
+      <a href="#awards">Awards</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#how-it-works">How it works</a>
+      <a class="footer__book" href="#book">Book a session</a>
+    </nav>
   </div>
+  <div class="footer__fine">
+    <p>&copy; 2026 Fundwise Capital. Kien Phan is a credit representative 514862 of Connective Credit Services Pty Ltd (Australian Credit Licence 389328). MFAA member. General information only. Speak with your accountant or a licensed adviser about your&nbsp;fund.</p>
+    <p>In it for the long game.</p>
+  </div>
+  <!-- TODO: real privacy policy and credit guide URLs. -->
+  <nav class="footer__legal" aria-label="Legal"><a href="#">Privacy policy</a><a href="#">Credit guide</a></nav>
 </footer>
 
 <script src="assets/js/lead.js" defer></script>
