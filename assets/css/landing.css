@@ -575,9 +575,9 @@ h1, h2, h3 { text-wrap: balance; }
   .quiz-screen .page-top { padding-top: clamp(12px, 2.4vh, 28px); }
   .quiz-screen .page-top .logo, .quiz-screen .page-top .award-pair { height: clamp(44px, 7.4vh, 76px); }
   .quiz-screen .intro { padding-block: clamp(8px, 2vh, 36px) clamp(10px, 2.2vh, 28px); }
-  /* the heading is one line exactly as wide as the quiz card under it: its column matches the
-     card's column, and the size is a share of that column's width (cqi) */
-  .quiz-screen .intro__main { container-type: inline-size; }
+  /* the heading is one line running the full width of the card and photo under it: it spans
+     both columns, and the size is a share of that width (cqi) */
+  .quiz-screen .intro__main { container-type: inline-size; grid-column: 1 / -1; }
   .quiz-screen .display { font-size: 6.27cqi; white-space: nowrap; }
   .quiz-screen .quiz-photo { min-height: 0; }
   .quiz-screen .quiz-card { padding: clamp(16px, 3vh, 40px) clamp(20px, 2.6vw, 40px); gap: clamp(10px, 1.7vh, 20px); }
