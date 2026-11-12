@@ -138,7 +138,7 @@ h1, h2, h3 { text-wrap: balance; }
 .hero__role { font: 500 clamp(17px, 2.4vh, 22px)/1.35 var(--sans); color: rgba(255, 255, 255, .92); margin-top: 6px; }
 /* role and MFAA membership on one line on wide screens; on phones MFAA drops to its own line */
 .hero__sep { margin-inline: .35em; color: rgba(255, 255, 255, .45); font-weight: 300; }
-@media (min-width: 901px) { .hero .hero__role { white-space: nowrap; font-size: clamp(15px, min(2.4vh, 1.35vw), 22px); } }
+@media (min-width: 901px) { .hero .hero__headline { white-space: nowrap; } .hero .hero__role { white-space: nowrap; font-size: clamp(15px, min(2.4vh, 1.35vw), 22px); } }
 @media (max-width: 900px) { .hero__sep { display: none; } .hero__mfaa { display: block; } }
 
 /* rotating award badges, like the Awards band on kienphan.com.au */
@@ -718,8 +718,14 @@ h1, h2, h3 { text-wrap: balance; }
 /* ---------- landing hero: the headline leads, Kien Phan sits under it ----------
    The form card carries the colour logo, so the white logo on the photograph only shows
    on the version reached from the quiz, which has no form. */
-.hero__headline { font: 400 clamp(40px, min(4.8vw, 7.6vh), 68px)/1.02 var(--serif); letter-spacing: -.015em; color: var(--white); }
-.hero__who-block { display: grid; gap: 4px; margin-top: clamp(6px, 1.8vh, 18px); }
+.hero__headline { font: 400 clamp(40px, min(4.1vw, 7.6vh), 68px)/1.02 var(--serif); letter-spacing: -.015em; color: var(--white); }
+.hero__who-block { display: flex; align-items: center; gap: clamp(12px, 1.4vw, 20px); margin-top: clamp(6px, 1.8vh, 18px); }
+.hero__who-text { display: grid; gap: 2px; }
+/* beside the photo: name, role, then MFAA membership on its own line */
+.hero__who-text .hero__sep { display: none; }
+.hero__who-text .hero__mfaa { display: block; font-weight: 400; color: rgba(255, 255, 255, .78); }
+/* round photo of Kien to the left of his name; decorative, his name sits right beside it */
+.hero__avatar { flex: none; width: clamp(64px, min(6vw, 11vh), 96px); height: auto; aspect-ratio: 1; border-radius: 50%; object-fit: cover; object-position: 50% 30%; border: 2px solid rgba(255, 255, 255, .85); box-shadow: 0 6px 18px rgba(0, 15, 35, .35); }
 .hero__who-name { font: 400 clamp(30px, min(3.4vw, 5.6vh), 48px)/1.05 var(--serif); letter-spacing: -.01em; color: var(--white); }
 .hero__who-block .hero__role { margin-top: 0; }
 .hero__brand { display: none; }
@@ -729,4 +735,5 @@ h1, h2, h3 { text-wrap: balance; }
 @media (max-width: 900px) {
   .hero__headline { font-size: clamp(36px, 10vw, 56px); }
   .hero__who-name { font-size: clamp(28px, 8vw, 36px); }
+  .hero__avatar { width: clamp(60px, 17vw, 76px); }
 }
