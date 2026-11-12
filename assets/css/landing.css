@@ -569,8 +569,11 @@ h1, h2, h3 { text-wrap: balance; }
   .quiz-screen .page-top { padding-top: clamp(12px, 2.4vh, 28px); }
   .quiz-screen .page-top .logo, .quiz-screen .page-top .award-pair { height: clamp(44px, 7.4vh, 76px); }
   .quiz-screen .intro { padding-block: clamp(8px, 2vh, 36px) clamp(10px, 2.2vh, 28px); }
-  .quiz-screen .display { font-size: clamp(30px, min(4.6vw, 7vh), 72px); }
-  .quiz-screen .intro__aside { font-size: clamp(14px, 1.9vh, 17px); }
+  /* heading and side note sized as a pair: the note fills the photo column below it and,
+     its line height is set from the heading so its three lines match the heading's two */
+  .quiz-screen .intro { --intro-t: clamp(28px, min(3.6vw, 5.4vh), 50px); align-items: center; }
+  .quiz-screen .display { font-size: var(--intro-t); }
+  .quiz-screen .intro__aside { max-width: none; font-size: min(1.45vw, 18px); line-height: calc(var(--intro-t) * .68); padding-bottom: 0; text-wrap: pretty; }
   .quiz-screen .quiz-grid { min-height: 0; }
   .quiz-screen .quiz-photo { min-height: 0; }
   .quiz-screen .quiz-card { padding: clamp(16px, 3vh, 40px) clamp(20px, 2.6vw, 40px); gap: clamp(10px, 1.7vh, 20px); }
